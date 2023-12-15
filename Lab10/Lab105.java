@@ -5,7 +5,6 @@ public class Lab105 {
         for (int i : nums) {
             bTree.add(i);
         }
-        bTree.breadthTraversal();
     }
 }
 

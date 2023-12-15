@@ -7,6 +7,5 @@ public class Lab106 {
             bt.add(i);
         }
 
-        bt.greatestTraversal();
     }
 }

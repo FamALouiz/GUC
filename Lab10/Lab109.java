@@ -6,6 +6,5 @@ public class Lab109 {
             t.add(i);
         }
 
-        System.out.println(t.path(-5));
     }
 }

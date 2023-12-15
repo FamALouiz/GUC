@@ -5,6 +5,5 @@ public class Lab108 {
         for (int i : nums) {
             t.add(i);
         }
-        t.preorderTraversal();
     }
 }

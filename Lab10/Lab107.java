@@ -5,6 +5,5 @@ public class Lab107 {
         for (int i : nums) {
             t.add(i);
         }
-        t.printRange(20, 90);
     }
 }
