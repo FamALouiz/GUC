@@ -1,4 +1,3 @@
-
 public class Lab77 {
 
     public static void main(String[] args) {
