@@ -1,6 +1,6 @@
 package Final2023;
 
-public class Lmao2 {
+public class FInal2023 {
 
     public static void pred(BTree tree, int key) {
         predHelper(tree.root, key);
