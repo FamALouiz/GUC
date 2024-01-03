@@ -7,11 +7,11 @@ public class Final2019 {
             return;
         }
         int size = size(ls);
-        int iter = size / k;
+        int iter = size / k - 1;
         SLLNode prev = null, curr = ls.head, next = ls.head.next;
-        while (iter-- > 0) {
+        while (iter > 0) {
             SLLNode ancor = curr;
-            for (int i = 0; i < k - 1; i++) {
+            for (int i = 0; i < k; i++) {
                 curr.next = prev;
                 prev = curr;
                 curr = next;
@@ -25,6 +25,7 @@ public class Final2019 {
             prev = curr;
             curr = next;
             next = next.next;
+            iter--;
         }
     }
 
