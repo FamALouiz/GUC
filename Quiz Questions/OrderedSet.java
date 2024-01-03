@@ -1,17 +1,76 @@
-public class TreeIntersect {
+import java.util.LinkedList;
+
+public class OrderedSet {
+
+    BTree bTree;
+
+    public OrderedSet() {
+        this.bTree = new BTree();
+    }
+
+    public void add(Comparable item) {
+        if (bTree == null) {
+            bTree.add(item);
+            return;
+        }
+        if (contains(item)) {
+            return;
+        }
+        bTree.add(item);
+    }
+
+    public boolean contains(Comparable item) {
+        if (bTree.search(item) != null) {
+            return true;
+        }
+        return false;
+    }
+
+    public int size() {
+        return sizeHelper(bTree.root);
+    }
+
+    public int sizeHelper(Node curr) {
+        if (curr == null) {
+            return 0;
+        }
+        return 1 + sizeHelper(curr.left) + sizeHelper(curr.right);
+    }
+
+    public void remove(Comparable item) {
+        if (contains(item)) {
+            bTree.delete(item);
+        }
+    }
+
+    public LinkedList<Comparable> toList() {
+        LinkedList<Comparable> ls = new LinkedList<>();
+        toListHelper(bTree.root, ls);
+        return ls;
+    }
+
+    public void toListHelper(Node n, LinkedList<Comparable> ls) {
+        if (n == null)
+            return;
+        toListHelper(n.left, ls);
+        ls.add(n.data);
+        toListHelper(n.right, ls);
+    }
+
     public static void main(String[] args) {
-        BTree tree1 = new BTree();
-        BTree tree2 = new BTree();
-        int[] nums1 = new int[] { 3, 2, 5, 1, 4, 7 };
-        int[] nums2 = new int[] { 3, 2, 6, 0, 4, 8 };
-        for (int i : nums1) {
-            tree1.add(i);
-        }
-        for (int i : nums2) {
-            tree2.add(i);
-        }
-        BTree n = tree1.treeIntersect(tree2);
-        n.displayTree();
+        OrderedSet s = new OrderedSet();
+        s.add(2);
+        s.add(1);
+        s.add(2);
+        s.add(5);
+        s.add(7);
+        s.add(5);
+        s.add(2);
+        s.remove(2);
+        s.remove(2);
+        s.add(2);
+        System.out.println(s.size());
+        System.out.println(s.toList());
     }
 }
 
@@ -33,7 +92,7 @@ class Node {
 }
 
 class BTree {
-    private Node root;
+    public Node root;
 
     public BTree() {
         root = null;
@@ -187,5 +246,23 @@ class BTree {
         }
         treeIntersectHelper(n1.left, n2.left, curr);
         treeIntersectHelper(n1.right, n2.right, curr);
+    }
+
+    public Node search(Comparable item) {
+        return helperSearch(this.root, item);
+    }
+
+    public Node helperSearch(Node n, Comparable item) {
+        if (n == null) {
+            return null;
+        }
+        if (n.data.equals(item)) {
+            return n;
+        }
+        if (item.compareTo(n.data) > 0) {
+            return helperSearch(n.right, item);
+        } else {
+            return helperSearch(n.left, item);
+        }
     }
 }

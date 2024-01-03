@@ -1,17 +1,42 @@
-public class TreeIntersect {
+import java.util.Scanner;
+
+public class numberOfNodes {
+    public static int noOfNodes(BTree t) {
+        return noOfNodesHelper(t.root);
+    }
+
+    public static int noOfNodesHelper(Node n) {
+        if (n == null)
+            return 0;
+        return 1 + noOfNodesHelper(n.left) + noOfNodesHelper(n.right);
+    }
+
+    public static int numberOfSmaller(BTree t, String v) {
+        return numberOfSmallerHelper(t.root, v);
+    }
+
+    public static int numberOfSmallerHelper(Node n, Comparable v) {
+        if (n == null)
+            return 0;
+        if (v.compareTo(n.data) > 0) {
+            return 1 + noOfNodesHelper(n.left) + numberOfSmallerHelper(n.right, v);
+        } else {
+            return numberOfSmallerHelper(n.left, v) + numberOfSmallerHelper(n.right, v);
+        }
+    }
+
     public static void main(String[] args) {
-        BTree tree1 = new BTree();
-        BTree tree2 = new BTree();
-        int[] nums1 = new int[] { 3, 2, 5, 1, 4, 7 };
-        int[] nums2 = new int[] { 3, 2, 6, 0, 4, 8 };
-        for (int i : nums1) {
-            tree1.add(i);
+        BTree tree = new BTree();
+        String[] names = new String[20];
+        Scanner sc = new Scanner(System.in);
+        for (int i = 0; i < 20; i++) {
+            names[i] = sc.next();
         }
-        for (int i : nums2) {
-            tree2.add(i);
+        for (String i : names) {
+            tree.add(i);
         }
-        BTree n = tree1.treeIntersect(tree2);
-        n.displayTree();
+        tree.displayTree();
+        System.out.println(numberOfSmaller(tree, "Fam"));
     }
 }
 
@@ -33,7 +58,7 @@ class Node {
 }
 
 class BTree {
-    private Node root;
+    public Node root;
 
     public BTree() {
         root = null;
